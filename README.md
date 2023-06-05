@@ -10,14 +10,20 @@ balance, token price and TVL history
 make init
 ```
 
-2. Create python (>=python3.10) virtual environment and install dependencies:
+2. Create/activate python (>=python3.10) virtual environment and install dependencies:
 ```shell
 make venv
+source ./venv/bin/activate
 ```
 
 3. Start PostgreSQL in docker container in separate tty (logs included):
 ```shell
 make postgres
+```
+
+4. Start CMD tool in separate tty:
+```shell
+make console
 ```
 
 ## Commands

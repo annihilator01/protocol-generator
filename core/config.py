@@ -1,3 +1,5 @@
+import pathlib
+
 from pydantic import BaseSettings
 from pydantic import validator
 
@@ -10,9 +12,6 @@ class _Settings(BaseSettings):
     pg_password: str
     db_url: str = None
 
-    class Config:
-        env_file = "../.env"
-
     @validator("db_url", pre=True, always=True)
     def construct_db_url(cls, value, values):
         return (
@@ -22,4 +21,4 @@ class _Settings(BaseSettings):
         )
 
 
-settings = _Settings()
+settings = _Settings(_env_file=pathlib.Path(__file__).parents[1] / ".env")
