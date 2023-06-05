@@ -1,2 +1,37 @@
-# protocol-generator
-Protocol data generation and analysis
+# Protocol Data Generator
+
+## Description
+CMD tool for generating protocol data such as tokens, accounts,
+balance, token price and TVL history
+
+## Launch Instructions
+1. Copy .env.example to .env file:
+```shell
+make init
+```
+
+2. Create python (>=python3.10) virtual environment and install dependencies:
+```shell
+make venv
+```
+
+3. Start PostgreSQL in docker container in separate tty (logs included):
+```shell
+make postgres
+```
+
+## Commands
+### generate_protocol_data
+Generates data for protocol
+```
+--accounts, number of accounts using protocol (default: 100)
+--start, activation date of protocol (default: now - 5 days)
+--end, deactivation date of protocol (default: now)
+--deposit, last deposit sum in usd (default: 2_000_000)
+```
+
+### get_current_deposit
+Get current deposit of protocol
+```
+--protocol, id of requested protocol
+```
