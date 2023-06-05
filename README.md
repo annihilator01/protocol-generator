@@ -26,6 +26,11 @@ make postgres
 make console
 ```
 
+5. Command to run pytest:
+```shell
+make test
+```
+
 ## Commands
 ### generate_protocol_data
 Generates data for protocol

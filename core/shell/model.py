@@ -3,6 +3,7 @@ import datetime as dt
 
 from pydantic import BaseModel
 from pydantic import Field
+from pydantic import root_validator
 from pydantic import validator
 from typing import Optional
 from typing import Self
@@ -39,6 +40,12 @@ class GenerateProtocolDataCommandOptions(CommandOptions):
             return dt.datetime.fromisoformat(value)
         else:
             return value
+
+    @root_validator
+    def validate_dates(cls, values: dict) -> dict:
+        if values["end"] < values["start"]:
+            raise ValueError("end date cannot be before start date")
+        return values
 
 
 class GetCurrentDepositCommandOptions(CommandOptions):

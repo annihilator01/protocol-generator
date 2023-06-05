@@ -37,11 +37,11 @@ class ProtocolDataGeneratorService:
         self,
         options: "GenerateProtocolDataCommandOptions",
     ) -> int:
-        protocol = await self._generate_protocol_with_tokens()
+        protocol = await self.generate_protocol_with_tokens()
         await self.base_repo.add_all([protocol], with_commit=True)
 
-        accounts = await self._generate_accounts(options.accounts)
-        token_prices = await self._generate_balance_history_and_token_price(
+        accounts = await self.generate_accounts(options.accounts)
+        token_prices = await self.generate_balance_history_and_token_price(
             protocol=protocol,
             accounts=accounts,
             start=options.start,
@@ -57,14 +57,14 @@ class ProtocolDataGeneratorService:
 
         return protocol.id
 
-    async def _generate_protocol_with_tokens(self) -> Protocol:
-        protocol = Protocol(name=self._generate_name())
+    async def generate_protocol_with_tokens(self) -> Protocol:
+        protocol = Protocol(name=self.generate_name())
 
         protocol.tokens = []
         for i in range(self.token_number):
             token = Token(
-                name=self._generate_name(4, 7),
-                symbol=self._generate_name(3, 4).upper(),
+                name=self.generate_name(4, 7),
+                symbol=self.generate_name(3, 4).upper(),
                 decimals=random.randint(1, 20),
             )
             protocol.tokens.append(token)
@@ -72,14 +72,14 @@ class ProtocolDataGeneratorService:
         return protocol
 
     @staticmethod
-    async def _generate_accounts(accounts_number: int) -> list[Account]:
+    async def generate_accounts(accounts_number: int) -> list[Account]:
         accounts = [
             Account(wallet_address=secrets.token_hex(20))
             for _ in range(accounts_number)
         ]
         return accounts
 
-    async def _generate_balance_history_and_token_price(
+    async def generate_balance_history_and_token_price(
         self,
         protocol: Protocol,
         accounts: list[Account],
@@ -224,7 +224,7 @@ class ProtocolDataGeneratorService:
         return tokens_prices
 
     @staticmethod
-    def _generate_name(from_k: int = 5, to_k: int = 5) -> str:
+    def generate_name(from_k: int = 5, to_k: int = 5) -> str:
         name_len = random.choice(range(from_k, to_k + 1))
         name_letters = random.choices(string.ascii_letters, k=name_len)
         return "".join(name_letters)

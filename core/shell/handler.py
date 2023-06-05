@@ -75,9 +75,9 @@ class _ProtocolGeneratorShellHandler(cmd.Cmd):
         protocol_token_repo = ProtocolTokenRepo(session)
         tvl_history_repo = TVLHistoryRepo(session)
         protocol_generator_service = ProtocolDataGeneratorService(
-            base_repo,
-            protocol_token_repo,
-            tvl_history_repo,
+            base_repo=base_repo,
+            protocol_token_repo=protocol_token_repo,
+            tvl_history_repo=tvl_history_repo,
         )
         return await protocol_generator_service.generate_all(opts)
 

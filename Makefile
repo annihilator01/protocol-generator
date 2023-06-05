@@ -14,6 +14,10 @@ venv:
 console:
 	python3 -m core.main
 
+.PHONY: test
+test:
+	python3 -m pytest ./tests
+
 .PHONY: postgres
 postgres:
 	docker compose up --build --remove-orphans postgres
