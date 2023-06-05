@@ -27,6 +27,7 @@ class ProtocolToken(BaseSQLModel, table=True):
     protocol_id: Optional[int] = sm.Field(
         nullable=False,
         foreign_key="protocol.id",
+        index=True,
     )
     token_id: Optional[int] = sm.Field(nullable=False, foreign_key="token.id")
 
@@ -91,12 +92,14 @@ class AccountBalanceHistory(BaseSQLModel, table=True):
     protocol_token_id: Optional[int] = sm.Field(
         nullable=False,
         foreign_key="protocol_token.id",
+        index=True,
     )
     account_id: Optional[int] = sm.Field(
         sa_column=sa.Column(
             sa.BigInteger(),
             sa.ForeignKey("account.id"),
             nullable=False,
+            index=True,
         ),
     )
     amount: uint256 = sm.Field(nullable=False)
@@ -132,7 +135,11 @@ class TokenPrice(BaseSQLModel, table=True):
             autoincrement=True,
         ),
     )
-    token_id: Optional[int] = sm.Field(nullable=False, foreign_key="token.id")
+    token_id: Optional[int] = sm.Field(
+        nullable=False,
+        foreign_key="token.id",
+        index=True,
+    )
     usd_price: Decimal = sm.Field(nullable=False)
     created_at: dt.datetime = sm.Field(
         sa_column=sa.Column(
@@ -157,6 +164,7 @@ class TVLHistory(BaseSQLModel, table=True):
     protocol_token_id: Optional[int] = sm.Field(
         nullable=False,
         foreign_key="protocol_token.id",
+        index=True,
     )
     amount: Decimal = sm.Field(nullable=False)
     amount_usd: Decimal = sm.Field(nullable=False)

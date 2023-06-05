@@ -1,5 +1,4 @@
 import pytest
-import string
 
 from pytest_mock import MockerFixture
 

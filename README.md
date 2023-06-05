@@ -46,3 +46,13 @@ Get current deposit of protocol
 ```
 --protocol, id of requested protocol
 ```
+
+## Implementation Details
+### TVLHistory
+Data for `TVLHistory` is generating from `AccountBalanceHistory` and `TokenPrice`.
+
+Each change of price and change of account balance generate new row in `TVLHistory`
+with new or same `create_at_block`, new `amount` or `amount_usd` and `created_at` value.
+
+### create_at_block
+`create_at_block` is considered as a block number inside one protocol for all tokens.
