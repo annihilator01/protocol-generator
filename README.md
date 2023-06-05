@@ -10,7 +10,7 @@ balance, token price and TVL history
 make init
 ```
 
-2. Create/activate python (>=python3.10) virtual environment and install dependencies:
+2. Create/activate python (>=python3.11) virtual environment and install dependencies:
 ```shell
 make venv
 source ./venv/bin/activate
